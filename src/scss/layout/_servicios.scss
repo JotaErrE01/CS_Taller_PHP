@@ -1,0 +1,12 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.seccion{
+
+    padding: 5rem 0;
+
+}
+
+.ocultar{
+    display: none;
+}
