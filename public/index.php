@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 
 use Controller\AuthController;
 use Controller\AdminController;
+use Controller\ApiController;
 use Controller\ServicioController;
 use MVC\Router;
 
@@ -34,6 +35,9 @@ $router->post('/admin', [ AdminController::class, 'index' ]);
 
 // pagina principal para los clientes
 $router->get('/', [ ServicioController::class, 'index' ]);
+
+//API de citas y servicios
+$router->get('/api/servicios', [ ApiController::class, 'index' ]);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador

@@ -1,6 +1,8 @@
 <h1>Crear Nueva Cita</h1>
 <p class="descripcion-pagina">Elige tus servicios a continuacion</p>
 
+<?php include __DIR__ . '/../templates/alertas.php' ?>
+
 <div id="app">
     <nav class="tabs">
         <button class="active" type="button" data-paso="1">Servicios</button>
@@ -18,7 +20,7 @@
         <h2>Tus Datos y Cita</h2>
         <p class="descripcion-pagina">Coloca tus datos y fecha de tu cita</p>
 
-        <form action="formulario">
+        <form class="formulario">
             <div class="campo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" placeholder="Tu Nombre">
@@ -31,7 +33,7 @@
 
             <div class="campo">
                 <label for="fecha">Fecha</label>
-                <input type="date" id="fecha">
+                <input type="date" id="fecha" min="<?php echo date('Y-m-d') ?>">
             </div>
 
             <div class="campo">
