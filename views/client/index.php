@@ -1,8 +1,6 @@
 <h1>Crear Nueva Cita</h1>
 <p class="descripcion-pagina">Elige tus servicios a continuacion</p>
 
-<?php include __DIR__ . '/../templates/alertas.php' ?>
-
 <div id="app">
     <nav class="tabs">
         <button class="active" type="button" data-paso="1">Servicios</button>
