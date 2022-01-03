@@ -1,5 +1,5 @@
 <h1 class="nombre-pagina"><?php echo $title ?></h1>
-<p class="descripcion-pagina">Inicia Seson con tus datos</p>
+<p class="descripcion-pagina">Inicia Sesión con tus datos</p>
 
 <?php include __DIR__ . '/../templates/alertas.php' ?>
 

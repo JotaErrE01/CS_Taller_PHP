@@ -32,6 +32,10 @@ const cambiarContenedor = (pagina) => {
         contenedor.classList.add('ocultar');
     });
     $contenedor.classList.remove('ocultar');
+    if(pagina.dataset.paso == 3){
+        //mostrar resumen de la cita cuando la pagina sea la tercera
+        mostrarResumen();
+    }
 }
 
 const paginacion = () => {
@@ -128,10 +132,12 @@ const consultarServicios = async () => {
     }
 }
 
-const mostrarAlerta = (mensaje, tipo) => {
+const mostrarAlerta = (mensaje, tipo, elemento, desaparece = true) => {
     //verificar si ya existe una alerta
     const $alertaPrevia = document.querySelector('.alerta');
-    if($alertaPrevia) return;
+    if($alertaPrevia) {
+        $alertaPrevia.remove();
+    };
 
     //Generar el html de la alerta
     const div = document.createElement('div');
@@ -140,12 +146,15 @@ const mostrarAlerta = (mensaje, tipo) => {
     div.classList.add(tipo);
     p.textContent = mensaje;
     div.appendChild(p);
-    document.querySelector('.formulario').before(div);
+    const contenedorAlerta = document.querySelector(`.${elemento}`);
+    elemento === 'formulario' ? contenedorAlerta.before(div) : contenedorAlerta.appendChild(div);
 
     // Eliminar alerta despues de 3 segundos
-    setTimeout(() => {
-        div.remove();
-    }, 3000);
+    if(desaparece){
+        setTimeout(() => {
+            div.remove();
+        }, 3000);
+    }
 }
 
 const agregarDatosUsuario = () => {
@@ -165,14 +174,71 @@ const agregarDatosUsuario = () => {
         const fecha = new Date($fecha.value);
         if(fecha.getDay() === 6){
             e.target.value = '';
-            mostrarAlerta('domingo no es un día laboral', 'error');
+            mostrarAlerta('domingo no es un día laboral', 'error', 'formulario');
         }else{
             cita.fecha = $fecha.value;
         };
     });
     $hora.addEventListener('input', () => {
+        const horaCita = parseInt($hora.value.split(':')[0])
         cita.hora = $hora.value;
+        if( horaCita <= 7 || horaCita >= 20){
+            mostrarAlerta('Hora no disponible', 'error', 'formulario');
+            cita.hora = '';
+        };
     });
+}
+
+const mostrarResumen = () => {
+    const $resumen = document.querySelector('.contenido-resumen');
+    const valoresCita = Object.values(cita);
+    let flag = true;
+    valoresCita.forEach(valor => {
+        if(valor.length === 0) flag = false;
+    });
+
+    // Limpiar el contenido del resumen si estan todos los campos llenos
+    while($resumen.firstChild){
+        $resumen.removeChild($resumen.firstChild);
+    }
+
+    if(!flag){
+        mostrarAlerta('Por favor completa todos los campos', 'error', 'contenido-resumen', false);
+        return;
+    };
+    
+    const { nombreCliente, email, fecha, hora, servicios } = cita;
+
+    //crear el html del resumen
+    const nombreUsuario = document.createElement('p');
+    nombreUsuario.innerHTML = `Nombre: <span>${nombreCliente}</span>`;
+    $resumen.appendChild(nombreUsuario);
+
+    const emailUsuario = document.createElement('p');
+    emailUsuario.innerHTML = `Email: <span>${email}</span>`;
+    $resumen.appendChild(emailUsuario);
+
+    const fechaUsuario = document.createElement('p');
+    fechaUsuario.innerHTML = `Fecha: <span>${fecha}</span>`;
+    $resumen.appendChild(fechaUsuario);
+
+    const horaUsuario = document.createElement('p');
+    horaUsuario.innerHTML = `Hora: <span>${hora}</span>`;
+    $resumen.appendChild(horaUsuario);
+
+    const precio = document.createElement('p');
+    let precioTotal = 0;
+    servicios.forEach(servicio => {
+        let {precio} = servicio;
+        precio = precio.split(' ')[1];
+        precioTotal += parseInt(precio);
+    });
+    precio.innerHTML = `Precio: <span>$${precioTotal}</span>`;
+    $resumen.appendChild(precio);
+
+    const serviciosUsuario = document.createElement('p');
+    serviciosUsuario.innerHTML = `Servicios: <span>${servicios.map(servicio => servicio.nombre).join(', ')}</span>`;
+    $resumen.appendChild(serviciosUsuario);
 }
 
 const iniciarApp = () => {
