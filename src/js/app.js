@@ -231,7 +231,11 @@ const reservarCita = async () => {
             body: datos
         });
         const data = await response.json();
-        console.log(data);
+        if(data.error){
+            mostrarAlerta(data.error, 'error', 'contenido-resumen');
+            return;
+        }
+        mostrarAlerta('Cita reservada Correctamente', 'exito', 'contenido-resumen');
     } catch (error) {
         console.log(error);        
     }
