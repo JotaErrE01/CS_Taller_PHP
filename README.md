@@ -8,6 +8,7 @@ Para que el proyecto funcione de una manera correcta usted debera tener instalad
 1. [PHP](https://www.php.net/downloads) ( version 8 o 7 )
 2. [Nodejs](https://nodejs.org/en/download/)
 3. [Composer](https://getcomposer.org/) ( que es un administrador de paquetes de PHP )
+4. [MySql](https://www.mysql.com/downloads/) (Como base de datos)
 
 Luego en el directorio del proyecto debera ejecutar los siguienes comandos en su terminal:
 
