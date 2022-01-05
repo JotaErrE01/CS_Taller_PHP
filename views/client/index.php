@@ -51,7 +51,7 @@
     <div class="paginacion">
         <button
             id="anterior"
-            class="boton"
+            class="boton ocultar"
         >&laquo; Anterior</button>
 
         <button

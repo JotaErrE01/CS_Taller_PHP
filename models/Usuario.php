@@ -23,7 +23,7 @@ class Usuario extends ActiveRecord {
         $this->email = $args['email'] ?? null;
         $this->password = $args['password'] ?? null;
         $this->telefono = $args['telefono'] ?? null;
-        $this->roleId = $args['roleId'] ?? null;
+        $this->roleId = $args['roleId'] ?? 5;
     }
 
     public function validarLogin(){
@@ -53,7 +53,6 @@ class Usuario extends ActiveRecord {
 
         self::$alertas['error'][] = 'El password es incorrecto';
         return false;
-
     }
 
     // public function getTipoUsuario(){

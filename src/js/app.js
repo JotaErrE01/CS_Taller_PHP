@@ -21,12 +21,15 @@ const cambiarTab = e => {
     const tab = e.target;
     $actual.classList.remove('active');
     tab.classList.add('active');
-    const paginaSiguiente = tab;
 
-    cambiarContenedor(paginaSiguiente);
+    //llamar a ocultar botones paginador
+    ocultarBotones(parseInt(tab.dataset.paso));
+    
+    //cambiar el contenedor de la seccion
+    cambiarContenedor(tab);
 }
 
-const cambiarContenedor = (pagina) => {
+const cambiarContenedor = pagina => {
     const $contenedor = document.querySelector(`#paso-${pagina.dataset.paso}`);
     $$contenedores.forEach(contenedor => {
         contenedor.classList.add('ocultar');
@@ -43,17 +46,34 @@ const paginacion = () => {
     const $siguiente = document.querySelector('#siguiente');
 
     // $anterior.addEventListener('click', cambiarPagina);
-    $siguiente.addEventListener('click', () => { cambiarPaginaSiguiente(1) });
-    $anterior.addEventListener('click', () => { cambiarPaginaSiguiente(-1) });
+    $siguiente.addEventListener('click', e => { cambiarPaginaSiguiente(e, 1) });
+    $anterior.addEventListener('click', e => { cambiarPaginaSiguiente(e, -1) });
 }
 
-const cambiarPaginaSiguiente = (num) => {
+const ocultarBotones = (num) => {
+    const $anterior = document.querySelector('#anterior');
+    const $siguiente = document.querySelector('#siguiente');
+    
+    if(num === 2){
+        $anterior.classList.remove('ocultar');
+        $siguiente.classList.remove('ocultar');
+    }else if(num === 1){
+        $anterior.classList.add('ocultar');
+        $siguiente.classList.remove('ocultar');
+    }else if(num === 3){
+        $anterior.classList.remove('ocultar');
+        $siguiente.classList.add('ocultar');
+    }
+}
+
+const cambiarPaginaSiguiente = (e, num) => {
     //Seleccionar la pestaña activa
     const $actual = document.querySelector('button.active');
     const numPagina = parseInt($actual.dataset.paso);
 
-    //verificar si es la ultima pagina
-    if (numPagina + num === 0 || numPagina + num === 4) return;
+    //oculatar los botones paginador
+    ocultarBotones(numPagina + num);
+
     const $paginaSiguiente = document.querySelector(`[data-paso="${numPagina + num}"]`);
     $paginaSiguiente.classList.add('active');
     $actual.classList.remove('active');
@@ -95,6 +115,7 @@ const imprimirServicios = servicios => {
     });
 }
 
+//funcion para seleccionar los servicios
 const seleccionarServicio = () => {
     const $servicios = document.querySelectorAll('.servicio');
     $servicios.forEach(servicio => {
@@ -121,6 +142,7 @@ const seleccionarServicio = () => {
     });
 }
 
+//consultar los servicios de la api hecha en php
 const consultarServicios = async () => {
     try {
         const response = await fetch('http://localhost:3000/api/servicios');
@@ -165,7 +187,6 @@ const agregarDatosUsuario = () => {
 
     $nombre.addEventListener('input', () => {
         cita.nombreCliente = $nombre.value;
-        console.log(cita);
     });
     $email.addEventListener('input', () => {
         cita.email = $email.value;
@@ -189,6 +210,34 @@ const agregarDatosUsuario = () => {
     });
 }
 
+//funcion para crear la cita
+const reservarCita = async () => {
+
+    const servicios = cita.servicios.map(servicio => servicio.id);
+
+    const datos = new FormData();
+    datos.append('nombre', cita.nombreCliente);
+    datos.append('email', cita.email);
+    datos.append('fecha', cita.fecha);
+    datos.append('hora', cita.hora);
+    datos.append('servicios', servicios);
+
+    // Peticion hacia la api
+    const url = 'http://localhost:3000/api/citas';
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: datos
+        });
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.log(error);        
+    }
+
+}
+
 const mostrarResumen = () => {
     const $resumen = document.querySelector('.contenido-resumen');
     const valoresCita = Object.values(cita);
@@ -206,24 +255,41 @@ const mostrarResumen = () => {
         mostrarAlerta('Por favor completa todos los campos', 'error', 'contenido-resumen', false);
         return;
     };
+
+    //Titulo del resumen
+    const tituloResumen = document.createElement('h2');
+    tituloResumen.textContent = 'Resumen de la cita';
+    $resumen.appendChild(tituloResumen);
     
     const { nombreCliente, email, fecha, hora, servicios } = cita;
 
     //crear el html del resumen
     const nombreUsuario = document.createElement('p');
-    nombreUsuario.innerHTML = `Nombre: <span>${nombreCliente}</span>`;
+    nombreUsuario.innerHTML = `<span>Nombre:</span> ${nombreCliente}`;
     $resumen.appendChild(nombreUsuario);
 
     const emailUsuario = document.createElement('p');
-    emailUsuario.innerHTML = `Email: <span>${email}</span>`;
+    emailUsuario.innerHTML = `<span>Email:</span> ${email}`;
     $resumen.appendChild(emailUsuario);
 
     const fechaUsuario = document.createElement('p');
-    fechaUsuario.innerHTML = `Fecha: <span>${fecha}</span>`;
+    //formatear fecha
+    const fechaObj = new Date(fecha);
+    const dia = fechaObj.getDate() + 2;
+    const mes = fechaObj.getMonth();
+    const year = fechaObj.getFullYear();
+    const fechaFormateada = new Date(Date.UTC(year, mes, dia)).toLocaleDateString('es-EC', {
+        weekday: 'long',
+        month: 'long',
+        year: 'numeric',
+        day: 'numeric'
+    });
+    fechaUsuario.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
+    fechaUsuario.classList.add('fecha-resumen');
     $resumen.appendChild(fechaUsuario);
 
     const horaUsuario = document.createElement('p');
-    horaUsuario.innerHTML = `Hora: <span>${hora}</span>`;
+    horaUsuario.innerHTML = `<span>Hora:</span> ${hora}`;
     $resumen.appendChild(horaUsuario);
 
     const precio = document.createElement('p');
@@ -233,12 +299,21 @@ const mostrarResumen = () => {
         precio = precio.split(' ')[1];
         precioTotal += parseInt(precio);
     });
-    precio.innerHTML = `Precio: <span>$${precioTotal}</span>`;
+    precio.innerHTML = `<span>Precio:</span> $${precioTotal}`;
+    precio.classList.add('precio-resumen');
     $resumen.appendChild(precio);
 
     const serviciosUsuario = document.createElement('p');
-    serviciosUsuario.innerHTML = `Servicios: <span>${servicios.map(servicio => servicio.nombre).join(', ')}</span>`;
+    serviciosUsuario.classList.add('servicios-resumen');
+    serviciosUsuario.innerHTML = `<span>Servicios:</span> ${servicios.map(servicio => servicio.nombre).join(', ')}`;
     $resumen.appendChild(serviciosUsuario);
+
+    //Boton para enviar la cita
+    const botonEnviar = document.createElement('button');
+    botonEnviar.classList.add('boton');
+    botonEnviar.onclick = reservarCita;
+    botonEnviar.textContent = 'Enviar';
+    $resumen.appendChild(botonEnviar);
 }
 
 const iniciarApp = () => {
