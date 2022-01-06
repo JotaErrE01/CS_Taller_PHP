@@ -24,7 +24,7 @@ const cambiarTab = e => {
 
     //llamar a ocultar botones paginador
     ocultarBotones(parseInt(tab.dataset.paso));
-    
+
     //cambiar el contenedor de la seccion
     cambiarContenedor(tab);
 }
@@ -35,7 +35,7 @@ const cambiarContenedor = pagina => {
         contenedor.classList.add('ocultar');
     });
     $contenedor.classList.remove('ocultar');
-    if(pagina.dataset.paso == 3){
+    if (pagina.dataset.paso == 3) {
         //mostrar resumen de la cita cuando la pagina sea la tercera
         mostrarResumen();
     }
@@ -53,14 +53,14 @@ const paginacion = () => {
 const ocultarBotones = (num) => {
     const $anterior = document.querySelector('#anterior');
     const $siguiente = document.querySelector('#siguiente');
-    
-    if(num === 2){
+
+    if (num === 2) {
         $anterior.classList.remove('ocultar');
         $siguiente.classList.remove('ocultar');
-    }else if(num === 1){
+    } else if (num === 1) {
         $anterior.classList.add('ocultar');
         $siguiente.classList.remove('ocultar');
-    }else if(num === 3){
+    } else if (num === 3) {
         $anterior.classList.remove('ocultar');
         $siguiente.classList.add('ocultar');
     }
@@ -157,7 +157,7 @@ const consultarServicios = async () => {
 const mostrarAlerta = (mensaje, tipo, elemento, desaparece = true) => {
     //verificar si ya existe una alerta
     const $alertaPrevia = document.querySelector('.alerta');
-    if($alertaPrevia) {
+    if ($alertaPrevia) {
         $alertaPrevia.remove();
     };
 
@@ -172,7 +172,7 @@ const mostrarAlerta = (mensaje, tipo, elemento, desaparece = true) => {
     elemento === 'formulario' ? contenedorAlerta.before(div) : contenedorAlerta.appendChild(div);
 
     // Eliminar alerta despues de 3 segundos
-    if(desaparece){
+    if (desaparece) {
         setTimeout(() => {
             div.remove();
         }, 3000);
@@ -193,17 +193,17 @@ const agregarDatosUsuario = () => {
     });
     $fecha.addEventListener('input', (e) => {
         const fecha = new Date($fecha.value);
-        if(fecha.getDay() === 6){
+        if (fecha.getDay() === 6) {
             e.target.value = '';
             mostrarAlerta('domingo no es un día laboral', 'error', 'formulario');
-        }else{
+        } else {
             cita.fecha = $fecha.value;
         };
     });
     $hora.addEventListener('input', () => {
         const horaCita = parseInt($hora.value.split(':')[0])
         cita.hora = $hora.value;
-        if( horaCita <= 7 || horaCita >= 20){
+        if (horaCita <= 7 || horaCita >= 20) {
             mostrarAlerta('Hora no disponible', 'error', 'formulario');
             cita.hora = '';
         };
@@ -231,13 +231,14 @@ const reservarCita = async () => {
             body: datos
         });
         const data = await response.json();
-        if(data.error){
+        if (data.error) {
             mostrarAlerta(data.error, 'error', 'contenido-resumen');
             return;
         }
         mostrarAlerta('Cita reservada Correctamente', 'exito', 'contenido-resumen');
     } catch (error) {
-        console.log(error);        
+        mostrarAlerta('Error en el Servidor', 'error', 'contenido-resumen');
+        console.log(error);
     }
 
 }
@@ -247,15 +248,15 @@ const mostrarResumen = () => {
     const valoresCita = Object.values(cita);
     let flag = true;
     valoresCita.forEach(valor => {
-        if(valor.length === 0) flag = false;
+        if (valor.length === 0) flag = false;
     });
 
     // Limpiar el contenido del resumen si estan todos los campos llenos
-    while($resumen.firstChild){
+    while ($resumen.firstChild) {
         $resumen.removeChild($resumen.firstChild);
     }
 
-    if(!flag){
+    if (!flag) {
         mostrarAlerta('Por favor completa todos los campos', 'error', 'contenido-resumen', false);
         return;
     };
@@ -264,7 +265,7 @@ const mostrarResumen = () => {
     const tituloResumen = document.createElement('h2');
     tituloResumen.textContent = 'Resumen de la cita';
     $resumen.appendChild(tituloResumen);
-    
+
     const { nombreCliente, email, fecha, hora, servicios } = cita;
 
     //crear el html del resumen
@@ -299,7 +300,7 @@ const mostrarResumen = () => {
     const precio = document.createElement('p');
     let precioTotal = 0;
     servicios.forEach(servicio => {
-        let {precio} = servicio;
+        let { precio } = servicio;
         precio = precio.split(' ')[1];
         precioTotal += parseInt(precio);
     });
@@ -316,7 +317,7 @@ const mostrarResumen = () => {
     const botonEnviar = document.createElement('button');
     botonEnviar.classList.add('boton');
     botonEnviar.onclick = reservarCita;
-    botonEnviar.textContent = 'Enviar';
+    botonEnviar.textContent = 'Reservar Cita';
     $resumen.appendChild(botonEnviar);
 }
 

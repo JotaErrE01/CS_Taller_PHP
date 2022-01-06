@@ -16,7 +16,6 @@ $router->post('/login', [ AuthController::class, 'login' ]);
 
 //Cerrar Sesion
 $router->get('/logout', [ AuthController::class, 'logout' ]);
-$router->post('/logout', [ AuthController::class, 'logout' ]);
 
 //Recuperar Contraseña
 $router->get('/olvide', [ AuthController::class, 'olvide' ]);
@@ -29,7 +28,7 @@ $router->post('/recuperar', [ AuthController::class, 'recuperar' ]);
 // $router->get('/crear-cuenta', [ AuthController::class, 'crear' ]);
 // $router->post('/crear-cuenta', [ AuthController::class, 'crear' ]);
 
-//pagina de admin
+//pagina de admin (privada)
 $router->get('/admin', [ AdminController::class, 'index' ]);
 $router->post('/admin', [ AdminController::class, 'index' ]);
 

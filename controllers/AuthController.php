@@ -35,8 +35,6 @@ class AuthController {
                         $_SESSION['role'] = $usuarioVerificado;
                         $_SESSION['logged_in'] = true;
 
-                        debuguear($_SESSION);
-
                         
                         // Iniciar Session
                         // debuguear($usuario);
@@ -60,8 +58,10 @@ class AuthController {
         ]);
     }
 
-    public static function logout( Router $router ) {
-        echo 'logout';
+    public static function logout() {
+        session_start();
+        $_SESSION = [];
+        header('Location: /login');
     }
 
     public static function recuperar( Router $router ) {
