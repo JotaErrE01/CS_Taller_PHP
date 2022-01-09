@@ -16,10 +16,6 @@ class ApiController {
 
     public static function guardarCita() {
 
-
-        // echo json_encode(['data' => $_POST]);
-        // return;
-
         //crear el cliente
         $cliente = new Usuario($_POST);
         
@@ -51,6 +47,16 @@ class ApiController {
         }
 
         echo json_encode(['resultado' => $citaResultado]);
+    }
+
+    public static function eliminarCita() {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = $_POST['id'];
+            $cita = Cita::find($id);
+            $resultado = $cita->eliminar();
+
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
     }
 
 
