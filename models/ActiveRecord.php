@@ -85,7 +85,6 @@ class ActiveRecord {
 
     // Sincroniza BD con Objetos en memoria
     public function sincronizar($args=[]) { 
-        debuguear($this);
         foreach($args as $key => $value) {
           if(property_exists($this, $key) && !is_null($value)) {
             $this->$key = $value;
@@ -156,7 +155,6 @@ class ActiveRecord {
         // Resultado de la consulta
         $resultado = self::$db->query($query);
 
-        // debuguear( $query );
         return [
            'resultado' =>  $resultado,
            'id' => self::$db->insert_id
@@ -194,7 +192,7 @@ class ActiveRecord {
 
     public function getTipoUsuario() {
         $query = "SELECT roles_usuarios.nombre FROM usuarios INNER JOIN roles_usuarios on usuarios.roleId = roles_usuarios.id WHERE usuarios.id = " . $this->id;
-        // debuguear($query);
+        
         $resultado = self::$db->query($query);
 
         // obtener la fila como arreglos y retornamos el primer registro
