@@ -40,7 +40,7 @@ Este comando iniciara un servidor de desarrollo de php con el cual podra visuali
 `Recuerde que para que funcione correctamente debera tener la base de datos del proyecto ya configurada, los scripts se encuentran en la carpeta de scrips de este repositorio`.
 Para Cambiar el Usuario y Contraseña de la base de datos en el archivo database.php que se encuentra dentro de la carpeta includes.
 
-    $db = mysqli_connect('localhost', 'root', 'jotaerre01', 'tallerbd');
+    $db = mysqli_connect('localhost', <tu usuario>, <tu_Contraseña>, 'tallerbd');
 
 
 ### Nota (opcional):
