@@ -38,6 +38,10 @@ Finalmente dentro de la carpeta public del proyecto debera ejecutar el comando:
 Este comando iniciara un servidor de desarrollo de php con el cual podra visualizar el proyecto.
 
 `Recuerde que para que funcione correctamente debera tener la base de datos del proyecto ya configurada, los scripts se encuentran en la carpeta de scrips de este repositorio`.
+Para Cambiar el Usuario y Contraseña de la base de datos en el archivo database.php que se encuentra dentro de la carpeta includes.
+
+    $db = mysqli_connect('localhost', <tu usuario>, <tu_Contraseña>, 'tallerbd');
+
 
 ### Nota (opcional):
 Si es de su agrado o conocimiento puede realizar la descarga de php, node y apache de uno de los siguientes contenedores de aplicaciones:
