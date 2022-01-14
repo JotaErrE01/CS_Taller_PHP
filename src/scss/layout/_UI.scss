@@ -42,7 +42,7 @@
 }
 
 .barra-servicios{
-    margin-bottom: v.$separacion / 2;
+    margin-bottom: calc(v.$separacion / 2);
 
     @include m.tablet{
         display: flex;

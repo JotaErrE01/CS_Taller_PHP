@@ -145,7 +145,7 @@ const seleccionarServicio = () => {
 //consultar los servicios de la api hecha en php
 const consultarServicios = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/servicios');
+        const response = await fetch('http://localhost:8000/api/servicios');
         const servicios = await response.json();
         imprimirServicios(servicios);
         seleccionarServicio();

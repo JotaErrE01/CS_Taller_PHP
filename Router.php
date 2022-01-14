@@ -23,9 +23,13 @@ class Router {
         // $rutas_protegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
 
         // $auth = $_SESSION['login'] ?? null;
+        // debuguear($_SERVER['REQUEST_URI']);
 
-        $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+        $ruta = explode('?', $_SERVER['REQUEST_URI']);
+
+        $currentUrl = $ruta[0] ?? '/';
         $method = $_SERVER['REQUEST_METHOD'];
+        // debuguear($currentUrl);
 
         if ($method === 'GET') {
             $fn = $this->getRoutes[$currentUrl] ?? null;
@@ -49,6 +53,8 @@ class Router {
         // }
 
         extract($datos);
+
+        // var_dump(__DIR__ . "/views/$view.php");
 
         ob_start(); // Almacenamiento en memoria durante un momento...
 
