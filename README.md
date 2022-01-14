@@ -2,31 +2,17 @@
 
 Este proyecto fue elaborado con diversas tecnologias, como lo son css, html y javascript para crear todo el lado del cliente e interacciones y PHP para el backend y generar las rutas.
 
-Puede consultar el proyecto dando click aqui => [TALLER DE AUTOS](https://taller-autos.herokuapp.com/)
+Puede consultar el proyecto finalizado dando click aqui => [TALLER DE AUTOS](https://taller-autos.herokuapp.com/)
 
 ## Instrucciones:
 
 Para que el proyecto funcione de una manera correcta usted debera tener instaladas las siguientes tecnologias:
 
 1. [PHP](https://www.php.net/downloads) ( version 8 o 7 )
-2. [Nodejs](https://nodejs.org/en/download/)
-3. [Composer](https://getcomposer.org/) ( que es un administrador de paquetes de PHP )
-4. [MySql](https://www.mysql.com/downloads/) (Como base de datos)
+2. [Composer](https://getcomposer.org/) ( que es un administrador de paquetes de PHP )
+3. [MySql](https://www.mysql.com/downloads/) (Como base de datos)
 
 Luego en el directorio del proyecto debera ejecutar los siguienes comandos en su terminal:
-
-    npm install
-
-Este comando reconstruira los modulos de node necesarios para ejecutar el siguiente comando.
-
-
-    npm run gulp
-
-Este generara el build de produccion.
-<br/>
-<br/>
-
-Lugo debera ejecutar el comando:
 ```
 composer install
 ```
@@ -34,7 +20,7 @@ Este comando restaurara la carpeta vendor necesaria para que el autoload de php 
 <br/>
 <br/>
 
-Finalmente dentro de la carpeta public del proyecto debera ejecutar el comando:
+Dentro de la carpeta public del proyecto debera ejecutar el comando:
 
     php -S localhost:8000
 
@@ -44,11 +30,4 @@ Este comando iniciara un servidor de desarrollo de php con el cual podra visuali
 Para Cambiar el Usuario y Contraseña de la base de datos en el archivo database.php que se encuentra dentro de la carpeta includes.
 
     $db = mysqli_connect('localhost', <tu usuario>, <tu_Contraseña>, '<nombreDb>');
-
-
-### Nota (opcional):
-Si es de su agrado o conocimiento puede realizar la descarga de php, node y apache de uno de los siguientes contenedores de aplicaciones:
-
-* [Laragon](https://laragon.org/download/)
-* [XAMP](https://www.apachefriends.org/es/index.html)
 
