@@ -1,4 +1,4 @@
-# Proyecto Taller de Autos de Construccion de Software
+# Sistema para la Gestión de un Taller de Mecánica Automotriz
 
 Este proyecto fue elaborado con diversas tecnologias, como lo son css, html y javascript para crear todo el lado del cliente e interacciones y PHP para el backend y generar las rutas.
 
