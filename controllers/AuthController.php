@@ -23,9 +23,6 @@ class AuthController {
                     $usuarioVerificado = $usuario->comprobarPassword( $_POST['password'] );
 
                     if($usuarioVerificado){
-
-                        //TODO: CONFIRMAR USUARIO
-
                         // autenticar usuario
                         session_start();
 
@@ -37,16 +34,12 @@ class AuthController {
 
                         
                         // Iniciar Session
-                        // debuguear($usuario);
-                        // $_SESSION['usuario'] = $usuario;
                         header('Location: /'. $usuarioVerificado);
                     }
 
                 }else{
                     Usuario::setAlerta( 'error', 'Usuario no encontrado' );
                 }
-
-                // debuguear($usuario);
             }
         }
 

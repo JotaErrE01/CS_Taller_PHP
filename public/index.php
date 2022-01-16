@@ -18,12 +18,6 @@ $router->post('/login', [ AuthController::class, 'login' ]);
 //Cerrar Sesion
 $router->get('/logout', [ AuthController::class, 'logout' ]);
 
-//Recuperar Contraseña
-$router->get('/olvide', [ AuthController::class, 'olvide' ]);
-$router->post('/olvide', [ AuthController::class, 'olvide' ]);
-$router->get('/recuperar', [ AuthController::class, 'recuperar' ]);
-$router->post('/recuperar', [ AuthController::class, 'recuperar' ]);
-
 //pagina de admin (privada)
 $router->get('/admin', [ AdminController::class, 'index' ]);
 $router->post('/admin', [ AdminController::class, 'index' ]);

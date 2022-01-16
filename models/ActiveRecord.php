@@ -200,5 +200,4 @@ class ActiveRecord {
 
         return $tipoUsuario;
     }
-
 }

@@ -145,12 +145,13 @@ const seleccionarServicio = () => {
 //consultar los servicios de la api hecha en php
 const consultarServicios = async () => {
     try {
-        const response = await fetch('http://localhost:8000/api/servicios');
+        const response = await fetch('https://taller-autos-final.herokuapp.com/api/servicios');
         const servicios = await response.json();
         imprimirServicios(servicios);
         seleccionarServicio();
     } catch (error) {
         console.log(error);
+        mostrarAlerta('Error al consultar Servicios', 'error', '#paso-1', false);
     }
 }
 
@@ -168,7 +169,7 @@ const mostrarAlerta = (mensaje, tipo, elemento, desaparece = true) => {
     div.classList.add(tipo);
     p.textContent = mensaje;
     div.appendChild(p);
-    const contenedorAlerta = document.querySelector(`.${elemento}`);
+    const contenedorAlerta = document.querySelector(`${elemento}`);
     elemento === 'formulario' ? contenedorAlerta.before(div) : contenedorAlerta.appendChild(div);
 
     // Eliminar alerta despues de 3 segundos
@@ -195,7 +196,7 @@ const agregarDatosUsuario = () => {
         const fecha = new Date($fecha.value);
         if (fecha.getDay() === 6) {
             e.target.value = '';
-            mostrarAlerta('domingo no es un día laboral', 'error', 'formulario');
+            mostrarAlerta('domingo no es un día laboral', 'error', '.formulario');
         } else {
             cita.fecha = $fecha.value;
         };
@@ -204,7 +205,7 @@ const agregarDatosUsuario = () => {
         const horaCita = parseInt($hora.value.split(':')[0])
         cita.hora = $hora.value;
         if (horaCita <= 7 || horaCita >= 20) {
-            mostrarAlerta('Hora no disponible', 'error', 'formulario');
+            mostrarAlerta('Hora no disponible', 'error', '.formulario');
             cita.hora = '';
         };
     });
@@ -232,12 +233,12 @@ const reservarCita = async () => {
         });
         const data = await response.json();
         if (data.error) {
-            mostrarAlerta(data.error, 'error', 'contenido-resumen');
+            mostrarAlerta(data.error, 'error', '.contenido-resumen');
             return;
         }
-        mostrarAlerta('Cita reservada Correctamente', 'exito', 'contenido-resumen');
+        mostrarAlerta('Cita reservada Correctamente', 'exito', '.contenido-resumen');
     } catch (error) {
-        mostrarAlerta('Error en el Servidor', 'error', 'contenido-resumen');
+        mostrarAlerta('Error en el Servidor', 'error', '.contenido-resumen');
         console.log(error);
     }
 
@@ -257,7 +258,7 @@ const mostrarResumen = () => {
     }
 
     if (!flag) {
-        mostrarAlerta('Por favor completa todos los campos', 'error', 'contenido-resumen', false);
+        mostrarAlerta('Por favor completa todos los campos', 'error', '.contenido-resumen', false);
         return;
     };
 

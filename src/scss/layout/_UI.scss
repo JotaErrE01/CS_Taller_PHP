@@ -26,6 +26,23 @@
     }
 }
 
+.contenedor-titulo{
+    text-align: center;
+    
+    h1{
+        display: inline;
+    }
+
+    .enlace-admin{
+        display: flex;
+        justify-content: end;
+        font-size: 3rem;
+        color: white;
+        margin-right: 2rem;
+    }
+
+}
+
 .barra{
     margin: v.$separacion 0;
 

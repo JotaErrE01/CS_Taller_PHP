@@ -1,5 +1,15 @@
-<h1>Crear Nueva Cita</h1>
-<p class="descripcion-pagina">Elige tus servicios a continuacion</p>
+
+
+<!-- <div class="contenedor-titulo"> -->
+    <div class="contenedor-titulo">
+        <a class="enlace-admin" href="/login">
+            <i class="fas fa-user"></i>
+        </a>
+        <h1>Crear Nueva Cita</h1>
+        <p class="descripcion-pagina">Elige tus servicios a continuacion</p>
+    </div>
+<!-- </div> -->
+
 
 <?php include __DIR__ . '/../templates/alertas.php' ?>
 

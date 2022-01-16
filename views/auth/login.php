@@ -17,6 +17,3 @@
     <input type="submit" class="boton" value="Iniciar Sesion" >
 </form>
 
-<div class="acciones">
-    <a href="/olvide">Olvidaste tu Password?</a>
-</div>
