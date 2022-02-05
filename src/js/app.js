@@ -224,7 +224,7 @@ const reservarCita = async () => {
     datos.append('servicios', servicios);
 
     // Peticion hacia la api
-    const url = 'http://localhost:3000/api/citas';
+    const url = 'https://taller-autos-final.herokuapp.com/api/citas';
 
     try {
         const response = await fetch(url, {
