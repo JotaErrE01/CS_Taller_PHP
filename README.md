@@ -1,4 +1,4 @@
-# Proyecto Taller de Autos de Construccion de Software
+# Sistema para la Gestión de un Taller de Mecánica Automotriz
 
 Este proyecto fue elaborado con diversas tecnologias, como lo son css, html y javascript para crear todo el lado del cliente e interacciones y PHP para el backend y generar las rutas.
 
@@ -8,7 +8,7 @@ Puede consultar el proyecto finalizado dando click aqui => [TALLER DE AUTOS](htt
 
 Para que el proyecto funcione de una manera correcta usted debera tener instaladas las siguientes tecnologias:
 
-1. [PHP](https://www.php.net/downloads) ( version 8 o 7 )
+1. [PHP](https://windows.php.net/download#php-8.1) ( version 8 o 7 )
 2. [Composer](https://getcomposer.org/) ( que es un administrador de paquetes de PHP )
 
 
