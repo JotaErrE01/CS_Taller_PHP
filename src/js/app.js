@@ -145,7 +145,7 @@ const seleccionarServicio = () => {
 //consultar los servicios de la api hecha en php
 const consultarServicios = async () => {
     try {
-        const response = await fetch('https://taller-autos-final.herokuapp.com/api/servicios');
+        const response = await fetch('https://taller-autos-proyecto.herokuapp.com/api/servicios');
         const servicios = await response.json();
         imprimirServicios(servicios);
         seleccionarServicio();
@@ -224,7 +224,7 @@ const reservarCita = async () => {
     datos.append('servicios', servicios);
 
     // Peticion hacia la api
-    const url = 'https://taller-autos-final.herokuapp.com/api/citas';
+    const url = 'https://taller-autos-proyecto.herokuapp.com/api/citas';
 
     try {
         const response = await fetch(url, {
