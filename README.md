@@ -2,7 +2,7 @@
 
 Este proyecto fue elaborado con diversas tecnologias, como lo son css, html y javascript para crear todo el lado del cliente e interacciones y PHP para el backend y generar las rutas.
 
-Puede consultar el proyecto finalizado dando click aqui => [TALLER DE AUTOS](https://taller-autos-final.herokuapp.com/)
+Puede consultar el proyecto finalizado dando click aqui => [TALLER DE AUTOS](https://taller-autos-proyecto.herokuapp.com/)
 
 ## Instrucciones:
 
