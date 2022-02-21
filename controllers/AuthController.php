@@ -7,6 +7,7 @@ use MVC\Router;
 
 class AuthController {
 
+    // Funcion para mostrar el formulario de login en la vista e iniciar sesion
     public static function login( Router $router ) {
         $alertas = [];
         $method = $_SERVER['REQUEST_METHOD'];
@@ -51,31 +52,10 @@ class AuthController {
         ]);
     }
 
+    // Funcion para cerrar sesion
     public static function logout() {
         session_start();
         $_SESSION = [];
         header('Location: /login');
     }
-
-    public static function recuperar( Router $router ) {
-        echo 'recuperar';
-    }
-
-    public static function olvide( Router $router ) {
-        $router->render('auth/olvide-password', []);
-    }
-
-    public static function crear( Router $router ) {
-
-        $method = $_SERVER['REQUEST_METHOD'];
-        if( $method === 'POST' ){
-            echo 'formulario enviado';
-        }else{
-            $router->render('auth/crear-cuenta', [
-                'title' => 'Crear Cuenta',
-            ]);
-        }
-
-    }
-
 }

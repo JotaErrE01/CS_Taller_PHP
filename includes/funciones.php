@@ -1,5 +1,6 @@
 <?php
 
+// funcion para debuguear variables en modo desarrollo
 function debuguear($variable) : string {
     echo "<pre>";
     var_dump($variable);
@@ -13,6 +14,7 @@ function s($html) : string {
     return $s;
 }
 
+// verificar si un usuario es administrador
 function isAdmin() : void {
     $role = $_SESSION['role'] ?? '';
     if($role !== 'admin') {

@@ -9,11 +9,13 @@ use Model\Usuario;
 
 class ApiController {
 
+    // Funcion para generar la api de los servicios
     public static function index() {
         $servicios = Servicio::all();
         echo json_encode($servicios);
     }
 
+    // Funcion para guardar las citas
     public static function guardarCita() {
 
         //crear el cliente
@@ -49,6 +51,7 @@ class ApiController {
         echo json_encode(['resultado' => $citaResultado]);
     }
 
+    // Funcion para eliminar las citas
     public static function eliminarCita() {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $id = $_POST['id'];

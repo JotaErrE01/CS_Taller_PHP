@@ -7,6 +7,7 @@ use MVC\Router;
 
 class ServicioController {
 
+    // Funcion para mostrar el listado de servicios en la vista
     public static function index(Router $router) {
         session_start();
 
@@ -20,6 +21,7 @@ class ServicioController {
         ]);
     }
 
+    // Funcion para mostrar el formulario de creacion de servicios en la vista y crear nuevos servicios
     public static function crear(Router $router) {
         session_start();
         isAdmin();
@@ -44,6 +46,7 @@ class ServicioController {
         ]);
     }
 
+    // Funcion para mostrar el formulario de edicion de servicios en la vista y editar servicios
     public static function actualizar(Router $router) {
         session_start();
         isAdmin();
@@ -72,6 +75,7 @@ class ServicioController {
         ]);
     }
 
+    // Funcion para eliminar los servicios
     public static function eliminar() {
         session_start();
         isAdmin();

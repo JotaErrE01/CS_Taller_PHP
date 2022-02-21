@@ -7,6 +7,7 @@ use MVC\Router;
 
 class AdminController {
 
+    // Funcion para mostrar el buscador de citas por fechas y buscar cias por fehcas
     public static function index(Router $router) {
         session_start();
 

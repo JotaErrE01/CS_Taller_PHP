@@ -26,6 +26,7 @@ class Usuario extends ActiveRecord {
         $this->roleId = $args['roleId'] ?? 5;
     }
 
+    // funcion para validar el correo y contraseña
     public function validarLogin(){
         if( empty(trim($this->email)) ){
             self::$alertas['error'][] = 'El email es obligatorio';
@@ -43,6 +44,7 @@ class Usuario extends ActiveRecord {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
+    // funcion para comprobar el password hasheado
     public function comprobarPassword( $password ){
         $resultado = password_verify($password, $this->password);
 
@@ -54,9 +56,4 @@ class Usuario extends ActiveRecord {
         self::$alertas['error'][] = 'El password es incorrecto';
         return false;
     }
-
-    // public function getTipoUsuario(){
-    //     $tipoUsuario = $this->getTipoUsuario();
-    //     return $tipoUsuario->nombre;
-    // }
 }
